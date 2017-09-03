@@ -34,5 +34,9 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "markdown365-parser": "0.0.1"
   }
 }
