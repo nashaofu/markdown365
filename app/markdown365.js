@@ -36,11 +36,6 @@ exports = module.exports = class Markdwown365 {
   // 当应用的所有窗口关闭时
   onQuit () {
     this.app.on('window-all-closed', () => {
-      // 销毁窗体
-      if (this.$window) {
-        this.$window.destroy()
-        this.$window = null
-      }
       this.app.quit()
     })
   }
@@ -78,6 +73,10 @@ exports = module.exports = class Markdwown365 {
 
     this.$window.webContents.openDevTools()
     // 加载URL地址
-    this.$window.loadURL(path.join(__dirname, '../views/index.html'))
+    if (process.env.NODE_ENV === 'development') {
+      this.$window.loadURL('http:127.0.0.1:8080')
+    } else {
+      this.$window.loadURL(path.join(__dirname, '../views/index.html'))
+    }
   }
 }
