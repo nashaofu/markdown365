@@ -1,1 +1,1 @@
-console.log('sadasdasd')
+import './app'

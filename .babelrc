@@ -5,6 +5,7 @@
         "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
       }
     }],
+    "react",
     "stage-3"
   ],
   "plugins": ["transform-runtime", "transform-class-properties"]

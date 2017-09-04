@@ -18,7 +18,7 @@ module.exports = {
       'node_modules',
       path.resolve(__dirname, './src')
     ],
-    extensions: ['.js', 'jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json'],
     alias: {
       'src': path.join(__dirname, './src')
     }
@@ -26,13 +26,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'eslint-loader',
         enforce: 'pre',
         include: [path.join(__dirname, './src')]
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [path.join(__dirname, './src')]
       }
@@ -50,7 +50,7 @@ module.exports = {
     hints: false
   },
 
-  target: 'web',
+  target: 'electron-renderer',
   stats: 'normal',
 
   devServer: {

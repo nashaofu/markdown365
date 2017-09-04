@@ -11,7 +11,12 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "generator-star-spacing": "error",
     "no-debugger": "error",
     "no-return-await": "off",
