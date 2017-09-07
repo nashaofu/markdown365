@@ -2,25 +2,24 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const { version } = require('./package')
+
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    index: 'index.js'
+    index: './index.js'
   },
   output: {
     path: path.resolve(__dirname, './views'),
     filename: '[name].js'
   },
   resolve: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, './src')
-    ],
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      'src': path.join(__dirname, './src')
+      '@': path.join(__dirname, './src')
     }
   },
   module: {
@@ -35,21 +34,83 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [path.join(__dirname, './src')]
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: isDevelopment
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: isDevelopment
+              }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.styl(us)?$/,
+        loader: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: isDevelopment
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: isDevelopment
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                sourceMap: isDevelopment
+              }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: `"${process.env.NODE_ENV} "`,
+        NODE_ENV: `"${isDevelopment ? 'development' : 'production'}"`,
         VERSION: `"${version}"`
       }
-    })
+    }),
+    new ExtractTextWebpackPlugin('[name].css')
   ],
   performance: {
     hints: false
   },
 
+  devtool: isDevelopment ? '#cheap-module-eval-source-map' : false,
   target: 'electron-renderer',
   stats: 'normal',
 
@@ -65,8 +126,7 @@ module.exports = {
   }
 }
 
-if (process.env.NODE_ENV === 'development') {
-  module.exports.devtool = '#cheap-module-eval-source-map'
+if (isDevelopment) {
   module.exports.plugins = [
     ...module.exports.plugins,
     new webpack.HotModuleReplacementPlugin(),
@@ -76,17 +136,17 @@ if (process.env.NODE_ENV === 'development') {
       inject: true
     })
   ]
-}
-
-if (process.env.NODE_ENV === 'production') {
+} else {
   module.exports.plugins = [
     ...module.exports.plugins,
     new CleanWebpackPlugin(path.resolve(__dirname, './views')),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
-      },
-      sourceMap: true
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

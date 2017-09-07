@@ -2,6 +2,8 @@ import React from 'react'
 
 export default (props) => {
   return (
-    <div>AppBar</div>
+    <div>
+      <i className="icons-menu" />
+    </div>
   )
 }
