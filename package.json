@@ -6,8 +6,8 @@
   "main": "./app/index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development electron .",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress"
+    "dev": "cross-env NODE_ENV=development node build/dev.js",
+    "build": "cross-env NODE_ENV=production node build/prod.js"
   },
   "repository": {
     "type": "git",
@@ -35,27 +35,36 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.16",
+    "chalk": "^2.1.0",
+    "connect-history-api-fallback": "^1.3.0",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "electron": "^1.7.5",
     "electron-builder": "^19.27.3",
     "eslint": "^4.6.0",
     "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "optimize-css-assets-webpack-plugin": "^3.1.1",
+    "ora": "^1.3.0",
     "postcss-loader": "^2.0.6",
+    "rimraf": "^2.6.1",
     "style-loader": "^0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.19.1",
+    "webpack-merge": "^4.1.0"
   }
 }
