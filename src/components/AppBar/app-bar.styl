@@ -11,10 +11,13 @@
     border none
     outline none
     cursor pointer
+    &:hover
     &:active
       outline none
     &:hover
       background-color #f8f8f8
+      &:active
+        background-color #f0f0f0
 
   &-files
     width 4rem
@@ -24,6 +27,7 @@
       z-index 1
     &-panel
       width 32rem
+      display flex
       position fixed
       top 0
       left 0
@@ -32,6 +36,11 @@
       background-color rgba(255,255,255,0.9)
       border-right 0.1rem solid #f8f8f8
       box-shadow 0.2rem 0 0.5rem #f8f8f8
+      &-container
+        height 100%
+        flex 1
+        overflow-x hidden
+        overflow-y auto
 
   &-title
     height 4rem
