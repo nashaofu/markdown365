@@ -1,6 +1,6 @@
 import React from 'react'
 import './app-bar.styl'
-import Files from '../Files'
+import Files from '../../container/Files'
 
 export default props => {
   return (
