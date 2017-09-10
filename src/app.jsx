@@ -7,7 +7,7 @@ import Viewer from './components/Viewer'
 const App = () => {
   return (
     <div>
-      <AppBar />
+      <AppBar title="你好世界！.md" />
       <Editor />
       <Viewer />
     </div>
