@@ -1,10 +1,11 @@
 const express = require('express')
 const webpack = require('webpack')
+const electron = require('electron')
+const childProcess = require('child_process')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const connectHistoryApiFallback = require('connect-history-api-fallback')
 const webpackDevConf = require('./webpack.dev.conf')
-
 const app = express()
 const compiler = webpack(webpackDevConf)
 
@@ -24,6 +25,10 @@ app.use(connectHistoryApiFallback())
 
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at http:127.0.0.1:8080' + '\n')
+  const electronProcess = childProcess.spawn(electron, ['.'])
+  electronProcess.on('close', () => {
+    process.exit()
+  })
 })
 
 // force page reload when html-webpack-plugin template changes
