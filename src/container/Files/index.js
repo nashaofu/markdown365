@@ -1,4 +1,7 @@
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import files from '../../actions/files'
 import Files from '../../components/Files'
 
 const mapStateToProps = state => {
@@ -7,10 +10,22 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = action => {
-  return {
+const mapDispatchToProps = action => ({
+  ...files
+})
 
+@connect(mapStateToProps, mapDispatchToProps)
+export default class FilesContainer extends Component {
+  render () {
+    const { files, add, remove, edit } = this.props
+    console.log(this.props)
+    return (
+      <Files
+        files={files}
+        onAdd={add}
+        onRemove={remove}
+        onEdit={edit}
+      />
+    )
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Files)

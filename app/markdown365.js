@@ -71,9 +71,10 @@ exports = module.exports = class Markdwown365 {
       this.$window = null
     })
 
-    this.$window.webContents.openDevTools()
     // 加载URL地址
     if (process.env.NODE_ENV === 'development') {
+      require('./devtools')
+      this.$window.webContents.openDevTools()
       this.$window.loadURL('http:127.0.0.1:8080')
     } else {
       this.$window.loadURL(path.join(__dirname, '../views/index.html'))
