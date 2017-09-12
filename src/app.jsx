@@ -1,12 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import store from './store'
-import App from './components/App'
+import 'normalize.css'
+import './stylus/markdown365.styl'
+import './stylus/markdown365-icons.styl'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.querySelector('#app')
-)
+if (process.env.NODE_ENV === 'development') {
+  module.exports = require('./app.dev')
+} else {
+  module.exports = require('./app.prod')
+}

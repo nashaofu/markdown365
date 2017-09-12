@@ -2,7 +2,9 @@ const path = require('path')
 const {
   app,
   BrowserWindow,
-  Menu
+  Menu,
+  ipcMain,
+  dialog
 } = require('electron')
 
 exports = module.exports = class Markdwown365 {
@@ -21,6 +23,7 @@ exports = module.exports = class Markdwown365 {
     // 主进程事件
     this.onReady()
     this.onQuit()
+    this.ipcMain()
   }
 
   // 应用准备完毕时执行
@@ -37,6 +40,12 @@ exports = module.exports = class Markdwown365 {
   onQuit () {
     this.app.on('window-all-closed', () => {
       this.app.quit()
+    })
+  }
+
+  ipcMain () {
+    ipcMain.on('openfile', () => {
+      this.openFile()
     })
   }
 
@@ -79,5 +88,20 @@ exports = module.exports = class Markdwown365 {
     } else {
       this.$window.loadURL(path.join(__dirname, '../views/index.html'))
     }
+  }
+
+  openFile () {
+    dialog.showOpenDialog(
+      this.$window,
+      {
+        filters: [
+          { name: 'Markdown', extensions: ['md'] },
+          { name: 'All Files', extensions: ['*'] }
+        ],
+        properties: ['openFile', 'multiSelections']
+      }, files => {
+        this.$window.webContents.send('openfile', files)
+      }
+    )
   }
 }
