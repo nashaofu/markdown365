@@ -1,4 +1,12 @@
-import 'normalize.css'
-import './stylus/markdown365.styl'
-import './stylus/markdown365-icons.styl'
-import './app'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './store'
+import App from './components/App'
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#app')
+)
