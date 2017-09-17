@@ -1,6 +1,6 @@
 import React from 'react'
 import AppBar from '@/container/AppBar'
-import SideBar from '../SideBar'
+import SideBar from '@/container/SideBar'
 import Editor from '../Editor'
 import Viewer from '../Viewer'
 

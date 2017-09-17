@@ -1,76 +1,60 @@
+import path from 'path'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
-import { appbar } from '@/actions'
-import AppBar from '@/components/AppBar'
+import {
+  ui,
+  files
+} from '@/actions'
+import SideBar from '@/components/SideBar'
 
 const mapStateToProps = state => {
   return {
-    appbar: state.appbar
+    sideBarExpanding: state.ui.sideBarExpanding
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  maximize: () => dispatch(appbar.maximize()),
-  restore: () => dispatch(appbar.restore()),
-  showPanel: () => dispatch(appbar.showPanel()),
-  hidePanel: () => dispatch(appbar.hidePanel())
+  sidebarToggle: sideBarExpanding => dispatch(ui.sidebarToggle(sideBarExpanding)),
+  addFiles: file => dispatch(files.add(file))
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class AppBarContainer extends Component {
   componentWillMount () {
-    ipcRenderer.addListener('maximize', this.toggleMaximize)
+    ipcRenderer.addListener('open-file', this.addFiles)
   }
 
   componentWillUnmount () {
-    ipcRenderer.removeListener('maximize', this.toggleMaximize)
+    ipcRenderer.removeListener('open-file', this.addFiles)
   }
 
-  toggleMaximize = (e, maximize) => {
-    if (maximize) {
-      this.props.maximize()
-    } else {
-      this.props.restore()
-    }
+  onSidebarToggle = () => {
+    this.props.sidebarToggle(!this.props.sideBarExpanding)
   }
 
-  onClose = () => {
-    ipcRenderer.send('close')
+  onAddFile = () => {
+    ipcRenderer.send('open-file')
   }
 
-  onToggleMaximize = () => {
-    if (this.props.appbar.maximize) {
-      ipcRenderer.send('restore')
-    } else {
-      ipcRenderer.send('maximize')
-    }
-  }
-
-  onMinimize = () => {
-    ipcRenderer.send('minimize')
-  }
-
-  onTogglePanel = () => {
-    if (this.props.appbar.showPanel) {
-      this.props.hidePanel()
-    } else {
-      this.props.showPanel()
+  addFiles = (e, files) => {
+    if (files) {
+      files = files.map(file => ({
+        filename: file,
+        basename: path.basename(file)
+      }))
+      this.props.addFiles(files)
     }
   }
 
   render () {
-    const { maximize, showPanel } = this.props.appbar
+    const { sideBarExpanding } = this.props
     return (
-      <AppBar
-        maximize={maximize}
-        showPanel={showPanel}
-        title="Markdown365"
-        onClose={this.onClose}
-        onToggleMaximize={this.onToggleMaximize}
-        onMinimize={this.onMinimize}
-        onTogglePanel={this.onTogglePanel}
+      <SideBar
+        sideBarExpanding={sideBarExpanding}
+        onSidebarToggle={this.onSidebarToggle}
+        onAddFile={this.onAddFile}
       />
     )
   }

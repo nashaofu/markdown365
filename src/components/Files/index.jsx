@@ -13,7 +13,6 @@ export default props => {
   return (
     <ul className="files">
       {files}
-      <li className="files-item" onClick={props.onClick}>添加文件</li>
     </ul>
   )
 }
