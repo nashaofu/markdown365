@@ -24,10 +24,9 @@ exports = module.exports = class Markdwown365 {
     this.onReady()
     this.onQuit()
 
-    this.onClose()
-    this.onMaximize()
-    this.onRestore()
-    this.onMinimize()
+    this.onWindowClose()
+    this.onWindowMaximize()
+    this.onWindowMinimize()
 
     this.onOpenFile()
     this.onSaveFile()
@@ -81,6 +80,18 @@ exports = module.exports = class Markdwown365 {
       this.$window = null
     })
 
+    // 在窗口最大化的时候触发.
+    this.$window.on('maximize', () => {
+      this.$window.webContents.send('window-maximize-change', true)
+    })
+    // 在窗口退出最大化的时候触发.
+    this.$window.on('unmaximize', () => {
+      this.$window.webContents.send('window-maximize-change', false)
+    })
+
+    // 设置缩放限制
+    this.$window.webContents.setVisualZoomLevelLimits(1, 1)
+
     // 加载URL地址
     if (process.env.NODE_ENV === 'development') {
       require('./devtools')
@@ -92,36 +103,33 @@ exports = module.exports = class Markdwown365 {
   }
 
   // 关闭窗口
-  onClose () {
-    ipcMain.on('close', () => {
+  onWindowClose () {
+    ipcMain.on('window-close', () => {
       this.$window.close()
     })
   }
 
-  // 最大化窗口
-  onMaximize () {
-    ipcMain.on('maximize', () => {
-      this.$window.maximize()
-    })
-  }
-
-  // 取消最大化
-  onRestore () {
-    ipcMain.on('restore', () => {
-      this.$window.restore()
+  // 最大化窗口(取消最大化)
+  onWindowMaximize () {
+    ipcMain.on('window-maximize', (e, windowIsMaximize) => {
+      if (windowIsMaximize) {
+        this.$window.maximize()
+      } else {
+        this.$window.restore()
+      }
     })
   }
 
   // 最小化窗口
-  onMinimize () {
-    ipcMain.on('minimize', () => {
+  onWindowMinimize () {
+    ipcMain.on('window-minimize', () => {
       this.$window.minimize()
     })
   }
 
   // 打开文件
   onOpenFile () {
-    ipcMain.on('openfile', () => {
+    ipcMain.on('open-file', () => {
       dialog.showOpenDialog(
         this.$window,
         {
@@ -132,7 +140,7 @@ exports = module.exports = class Markdwown365 {
           properties: ['openFile', 'multiSelections']
         }, files => {
           // 没有选择文件就返回undefined
-          this.$window.webContents.send('openfile', files)
+          this.$window.webContents.send('open-file', files)
         }
       )
     })
@@ -140,7 +148,7 @@ exports = module.exports = class Markdwown365 {
 
   // 保存文件
   onSaveFile () {
-    ipcMain.on('savefile', () => {
+    ipcMain.on('save-file', () => {
       dialog.showSaveDialog(
         this.$window,
         {
@@ -150,7 +158,7 @@ exports = module.exports = class Markdwown365 {
           ]
         }, filename => {
           // 没有生成文件名就返回undefined
-          this.$window.webContents.send('savefile', filename)
+          this.$window.webContents.send('save-file', filename)
         }
       )
     })

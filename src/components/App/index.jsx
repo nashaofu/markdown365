@@ -1,14 +1,20 @@
 import React from 'react'
 import AppBar from '@/container/AppBar'
+import SideBar from '../SideBar'
 import Editor from '../Editor'
 import Viewer from '../Viewer'
+
+import './app.styl'
 
 export default props => {
   return (
     <div>
       <AppBar />
-      <Editor />
-      <Viewer />
+      <div className="app-container">
+        <SideBar />
+        <Editor />
+        <Viewer />
+      </div>
     </div>
   )
 }

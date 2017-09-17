@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import appbar from './appbar'
+import ui from './ui'
 import files from './files'
 
 export default combineReducers({
-  appbar,
+  ui,
   files
 })

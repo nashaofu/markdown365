@@ -2,72 +2,54 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
-import { appbar } from '@/actions'
+import { ui } from '@/actions'
 import AppBar from '@/components/AppBar'
 
 const mapStateToProps = state => {
   return {
-    appbar: state.appbar
+    windowIsMaximize: state.ui.windowIsMaximize
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  close: () => dispatch(appbar.close()),
-  maximize: () => dispatch(appbar.maximize()),
-  restore: () => dispatch(appbar.restore()),
-  minimize: () => dispatch(appbar.minimize()),
-  showPanel: () => dispatch(appbar.showPanel()),
-  hidePanel: () => dispatch(appbar.hidePanel())
+  windowMaximize: windowIsMaximize => dispatch(ui.windowMaximize(windowIsMaximize))
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class AppBarContainer extends Component {
-  // componentWillMount () {
-  //   ipcRenderer.on('window-status', this.addFiles)
-  // }
-  // componentWillUnmount () {
-
-  // }
-
-  onClose = () => {
-    this.props.close()
-    ipcRenderer.send('close')
+  componentWillMount () {
+    ipcRenderer.addListener('window-maximize-change', this.toggleMaximize)
   }
 
-  onToggleMaximize = () => {
-    if (this.props.appbar.maximize) {
-      this.props.restore()
-      ipcRenderer.send('restore')
-    } else {
-      this.props.maximize()
-      ipcRenderer.send('maximize')
-    }
+  componentWillUnmount () {
+    ipcRenderer.removeListener('window-maximize-change', this.toggleMaximize)
   }
 
-  onMinimize = () => {
-    this.props.minimize()
-    ipcRenderer.send('minimize')
+  toggleMaximize = (e, windowIsMaximize) => {
+    this.props.windowMaximize(windowIsMaximize)
   }
 
-  onTogglePanel = () => {
-    if (this.props.appbar.showPanel) {
-      this.props.hidePanel()
-    } else {
-      this.props.showPanel()
-    }
+  onWindowClose = () => {
+    ipcRenderer.send('window-close')
+  }
+
+  onWindowMaximizeToggle = () => {
+    ipcRenderer.send('window-maximize', !this.props.windowIsMaximize)
+  }
+
+  onWindowMinimize = () => {
+    ipcRenderer.send('window-minimize')
   }
 
   render () {
-    const { maximize, showPanel } = this.props.appbar
+    const { windowIsMaximize } = this.props
     return (
       <AppBar
-        maximize={maximize}
-        showPanel={showPanel}
         title="Markdown365"
-        onClose={this.onClose}
-        onToggleMaximize={this.onToggleMaximize}
-        onMinimize={this.onMinimize}
-        onTogglePanel={this.onTogglePanel}
+        windowIsMaximize={windowIsMaximize}
+        onWindowClose={this.onWindowClose}
+        onWindowMaximizeToggle={this.onWindowMaximizeToggle}
+        onWindowMinimize={this.onWindowMinimize}
       />
     )
   }

@@ -1,0 +1,43 @@
+.side-bar
+  &-button
+    width 4rem
+    height 4rem
+    margin 0
+    padding 0
+    font-size 2.4rem
+    color #999
+    background-color transparent
+    border none
+    outline none
+    cursor pointer
+    &:hover
+    &:active
+      outline none
+    &:hover
+      color #333
+      background-color #f8f8f8
+      &:active
+        background-color #f0f0f0
+
+  &-bar
+    width 4rem
+    position absolute
+    top 0
+    bottom 0
+    left 0
+    background-color #fff
+    z-index 1
+  &-panel
+    width 32rem
+    position absolute
+    top 0
+    left 4rem
+    bottom 0
+    background-color #fff
+    transition all 0.3s ease-out
+    opacity 0
+    transform translateX(-100%)
+    &-active
+      opacity 1
+      transform translateX(0)
+      border-right 0.1rem solid #f8f8f8

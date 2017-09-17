@@ -20,35 +20,6 @@
       background-color #f8f8f8
       &:active
         background-color #f0f0f0
-
-  &-files
-    width 4rem
-    min-width 4rem
-    &-toggle
-      position relative
-      z-index 1
-    &-panel
-      width 32rem
-      display flex
-      position fixed
-      top 0
-      left 0
-      bottom 0
-      padding-top 4rem
-      transition all 0.3s ease-out
-      opacity 0
-      transform translateX(-100%)
-      &-show
-        opacity 1
-        transform translateX(0)
-        background-color rgba(255,255,255,0.9)
-        border-right 0.1rem solid #f8f8f8
-      &-container
-        height 100%
-        flex 1
-        overflow-x hidden
-        overflow-y auto
-
   &-title
     height 4rem
     line-height 3.8rem

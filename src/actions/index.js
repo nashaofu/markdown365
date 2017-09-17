@@ -1,2 +1,2 @@
-export appbar from './appbar'
+export ui from './ui'
 export files from './files'

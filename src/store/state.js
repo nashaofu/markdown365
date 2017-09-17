@@ -1,6 +1,32 @@
 export default {
   files: [
-    'C:\\Users\\nashaofu\\Documents\\Github\\markdown365\\views\\js\\manifest.8e2e1936b04254cf16c6.js',
-    'C:\\Users\\nashaofu\\Documents\\Github\\markdown365\\views\\js\\vendor.7d1e9a571ff42985b32c.js'
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\[控制器时间校验功能说明文档.md',
+      basename: '[控制器时间校验功能说明文档.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\bot-uaa-layout.md',
+      basename: 'bot-uaa-layout.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\going.md',
+      basename: 'going.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\home.md',
+      basename: 'home.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\光伏一期需求文档.md',
+      basename: '光伏一期需求文档.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\控制器时间校验功能说明文档.md',
+      basename: '控制器时间校验功能说明文档.md'
+    },
+    {
+      filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\问题列表.md',
+      basename: '问题列表.md'
+    }
   ]
 }
