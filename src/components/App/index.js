@@ -1,5 +1,5 @@
 import React from 'react'
-import AppBar from '../AppBar'
+import AppBar from '@/container/AppBar'
 import Editor from '../Editor'
 import Viewer from '../Viewer'
 

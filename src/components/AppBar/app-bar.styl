@@ -7,6 +7,7 @@
     margin 0
     padding 0
     font-size 2.4rem
+    color #999
     background-color transparent
     border none
     outline none
@@ -15,6 +16,7 @@
     &:active
       outline none
     &:hover
+      color #333
       background-color #f8f8f8
       &:active
         background-color #f0f0f0
@@ -33,9 +35,14 @@
       left 0
       bottom 0
       padding-top 4rem
-      background-color rgba(255,255,255,0.9)
-      border-right 0.1rem solid #f8f8f8
-      box-shadow 0.2rem 0 0.5rem #f8f8f8
+      transition all 0.3s ease-out
+      opacity 0
+      transform translateX(-100%)
+      &-show
+        opacity 1
+        transform translateX(0)
+        background-color rgba(255,255,255,0.9)
+        border-right 0.1rem solid #f8f8f8
       &-container
         height 100%
         flex 1
@@ -50,6 +57,7 @@
     white-space nowrap
     overflow hidden
     text-overflow ellipsis
+    -webkit-app-region drag
   &-window
     width 12rem
     min-width 12rem

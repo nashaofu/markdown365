@@ -23,7 +23,14 @@ exports = module.exports = class Markdwown365 {
     // 主进程事件
     this.onReady()
     this.onQuit()
-    this.ipcMain()
+
+    this.onClose()
+    this.onMaximize()
+    this.onRestore()
+    this.onMinimize()
+
+    this.onOpenFile()
+    this.onSaveFile()
   }
 
   // 应用准备完毕时执行
@@ -43,12 +50,6 @@ exports = module.exports = class Markdwown365 {
     })
   }
 
-  ipcMain () {
-    ipcMain.on('openfile', () => {
-      this.openFile()
-    })
-  }
-
   // 创建窗体
   createWindow () {
     if (this.$window) {
@@ -62,7 +63,7 @@ exports = module.exports = class Markdwown365 {
       minWidth: 720,
       minHeight: 450,
       center: true,
-      // frame: false,
+      frame: false,
       show: false,
       backgroundColor: '#ffffff',
       // icon: path.join(__dirname, '../icon/32x32.png'),
@@ -90,18 +91,68 @@ exports = module.exports = class Markdwown365 {
     }
   }
 
-  openFile () {
-    dialog.showOpenDialog(
-      this.$window,
-      {
-        filters: [
-          { name: 'Markdown', extensions: ['md'] },
-          { name: 'All Files', extensions: ['*'] }
-        ],
-        properties: ['openFile', 'multiSelections']
-      }, files => {
-        this.$window.webContents.send('openfile', files)
-      }
-    )
+  // 关闭窗口
+  onClose () {
+    ipcMain.on('close', () => {
+      this.$window.close()
+    })
+  }
+
+  // 最大化窗口
+  onMaximize () {
+    ipcMain.on('maximize', () => {
+      this.$window.maximize()
+    })
+  }
+
+  // 取消最大化
+  onRestore () {
+    ipcMain.on('restore', () => {
+      this.$window.restore()
+    })
+  }
+
+  // 最小化窗口
+  onMinimize () {
+    ipcMain.on('minimize', () => {
+      this.$window.minimize()
+    })
+  }
+
+  // 打开文件
+  onOpenFile () {
+    ipcMain.on('openfile', () => {
+      dialog.showOpenDialog(
+        this.$window,
+        {
+          filters: [
+            { name: 'Markdown', extensions: ['md'] },
+            { name: 'All Files', extensions: ['*'] }
+          ],
+          properties: ['openFile', 'multiSelections']
+        }, files => {
+          // 没有选择文件就返回undefined
+          this.$window.webContents.send('openfile', files)
+        }
+      )
+    })
+  }
+
+  // 保存文件
+  onSaveFile () {
+    ipcMain.on('savefile', () => {
+      dialog.showSaveDialog(
+        this.$window,
+        {
+          filters: [
+            { name: 'Markdown', extensions: ['md'] },
+            { name: 'All Files', extensions: ['*'] }
+          ]
+        }, filename => {
+          // 没有生成文件名就返回undefined
+          this.$window.webContents.send('savefile', filename)
+        }
+      )
+    })
   }
 }

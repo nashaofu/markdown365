@@ -12,6 +12,7 @@
     "transform-runtime",
     "transform-class-properties",
     "transform-decorators-legacy",
+    "transform-export-extensions",
     "syntax-dynamic-import"
   ]
 }

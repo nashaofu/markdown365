@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
-import files from '../../actions/files'
-import Files from '../../components/Files'
+import { files } from '@/actions'
+import Files from '@/components/Files'
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +17,24 @@ const mapDispatchToProps = dispatch => ({
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class FilesContainer extends Component {
+  componentWillMount () {
+    ipcRenderer.on('openfile', this.addFiles)
+  }
+
+  componentWillUnmount () {
+    ipcRenderer.on('openfile', this.addFiles)
+  }
+
+  onClick = () => {
+    ipcRenderer.send('openfile')
+  }
+
+  addFiles = (e, files) => {
+    if (files) {
+      this.props.addFiles(files)
+    }
+  }
+
   render () {
     const { files, add, remove, edit } = this.props
     return (
@@ -28,13 +46,5 @@ export default class FilesContainer extends Component {
         onClick={this.onClick}
       />
     )
-  }
-
-  onClick = () => {
-    ipcRenderer.send('openfile')
-    ipcRenderer.once('openfile', (e, files) => {
-      console.log(files)
-      this.props.add(files)
-    })
   }
 }
