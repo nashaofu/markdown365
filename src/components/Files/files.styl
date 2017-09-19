@@ -6,20 +6,15 @@
     height 5.2rem
     padding 7px
     cursor pointer
-    border-top 0.1rem solid #f8f8f8
-    border-bottom 0.1rem solid #f8f8f8
+    border-top 0.1rem solid rgba(248, 248, 248,0.8)
+    border-bottom 0.1rem solid rgba(248, 248, 248,0.8)
     overflow hidden
+    transition all 0.15s ease-in-out
     &:hover
-      box-shadow 0 0 10rem #f8f8f8 inset
-      .files-item-basename
-        opacity 0.2
-        transform translateY(-3.6rem) rotateX(90deg)
-      .files-item-filename
-        opacity 1
-        transform translateY(-3.6rem)
+      background-color #f8f8f8
     &:active
       background-color #f8f8f8
-    &-basename
+      background-image linear-gradient(to bottom, #fff, #eee)
     &-filename
       height 3.6rem
       line-height 3.6rem
@@ -28,7 +23,8 @@
       text-overflow ellipsis
       overflow hidden
       text-overflow ellipsis
-      transition all 0.15s ease-in-out
-    &-filename
-      opacity 0.2
-      transform  rotateX(-90deg)
+    &&-active
+      color #06f
+      font-weight 400
+      background-color #f8f8f8
+      background-image linear-gradient(to bottom, #fff, #eee)

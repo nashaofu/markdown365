@@ -12,8 +12,10 @@ export default props => {
       <AppBar />
       <div className="app-container">
         <SideBar />
-        <Editor />
-        <Viewer />
+        <div className="app-container-view">
+          <Editor />
+          <Viewer />
+        </div>
       </div>
     </div>
   )

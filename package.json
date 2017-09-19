@@ -21,6 +21,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
     "markdown365-parser": "0.0.1",
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
