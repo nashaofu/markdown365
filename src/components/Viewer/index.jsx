@@ -3,6 +3,8 @@ import './viewer.styl'
 
 export default props => {
   return (
-    <div className="viewer">Viewer</div>
+    <div className="viewer">
+      <div id="viewer"></div>
+    </div>
   )
 }
