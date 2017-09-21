@@ -35,6 +35,6 @@ export default handleActions({
 
   [EDIT]: (state, { payload }) => ({
     ...state,
-    active: payload
+    active: payload.file
   })
 }, files)

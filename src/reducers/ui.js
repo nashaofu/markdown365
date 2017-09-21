@@ -11,6 +11,6 @@ const ui = {
 }
 
 export default handleActions({
-  [WINDOW_MAXIMIZE]: (state = {}, { payload }) => ({ ...state, windowIsMaximize: payload }),
-  [SIDEBAR_TOGGLE]: (state = {}, { payload }) => ({ ...state, sideBarExpanding: payload })
+  [WINDOW_MAXIMIZE]: (state, { payload }) => ({ ...state, windowIsMaximize: payload }),
+  [SIDEBAR_TOGGLE]: (state, { payload }) => ({ ...state, sideBarExpanding: payload })
 }, ui)
