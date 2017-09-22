@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { ipcRenderer } from 'electron'
+
 import { files } from '@/actions'
 import Files from '@/components/Files'
 
@@ -16,6 +18,10 @@ const mapDispatchToProps = dispatch => ({
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class FilesContainer extends Component {
+  onOpenFile = () => {
+    ipcRenderer.send('open-file')
+  }
+
   onSelect = file => {
     if (file.filename !== this.props.active.filename) {
       this.props.editFile(file)
@@ -27,6 +33,7 @@ export default class FilesContainer extends Component {
       <Files
         files={files}
         active={active}
+        onOpenFile={this.onOpenFile}
         onSelect={this.onSelect}
       />
     )

@@ -6,6 +6,7 @@
   "main": "./app/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/dev.js",
+    "main": "electron .",
     "build": "cross-env NODE_ENV=production node build/prod.js"
   },
   "repository": {

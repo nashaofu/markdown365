@@ -32,7 +32,7 @@ export default props => {
         <div className="side-bar-container-open-file">
           <button
             className="side-bar-button"
-            onClick={props.onAddFile}
+            onClick={props.onOpenFile}
             title={lang.openFile}
           >
             <i className="icons-open-file" />

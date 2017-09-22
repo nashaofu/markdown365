@@ -37,7 +37,7 @@ export default class AppBarContainer extends Component {
     this.props.sidebarToggle(!this.props.sideBarExpanding)
   }
 
-  onAddFile = () => {
+  onOpenFile = () => {
     ipcRenderer.send('open-file')
   }
 
@@ -66,7 +66,7 @@ export default class AppBarContainer extends Component {
         sideBarExpanding={sideBarExpanding}
         viewerShow={viewerShow}
         onSidebarToggle={this.onSidebarToggle}
-        onAddFile={this.onAddFile}
+        onOpenFile={this.onOpenFile}
         onViewerToggle={this.onViewerToggle}
       />
     )

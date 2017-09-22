@@ -1,11 +1,11 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import ReduxPromise from 'redux-promise'
 import reducers from '@/reducers'
-import state from './state'
+// import state from './state'
 
 const store = createStore(
   reducers,
-  state,
+  // state,
   compose(
     applyMiddleware(ReduxPromise),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

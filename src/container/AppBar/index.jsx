@@ -7,7 +7,8 @@ import AppBar from '@/components/AppBar'
 
 const mapStateToProps = state => {
   return {
-    windowIsMaximize: state.ui.windowIsMaximize
+    windowIsMaximize: state.ui.windowIsMaximize,
+    active: state.files.active
   }
 }
 
@@ -42,10 +43,11 @@ export default class AppBarContainer extends Component {
   }
 
   render () {
-    const { windowIsMaximize } = this.props
+    const { active, windowIsMaximize } = this.props
+    const title = active.basename || 'Markdown365'
     return (
       <AppBar
-        title="Markdown365"
+        title={title}
         windowIsMaximize={windowIsMaximize}
         onWindowClose={this.onWindowClose}
         onWindowMaximizeToggle={this.onWindowMaximizeToggle}
