@@ -27,6 +27,7 @@ devMiddleware.waitUntilValid(() => {
   console.log('> Listening at http:127.0.0.1:8080' + '\n')
   const electronProcess = childProcess.spawn(electron, ['.'])
   electronProcess.on('close', () => {
+    console.log('> app has exited')
     process.exit()
   })
 })

@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux'
-import ReduxThunk from 'redux-thunk'
+import ReduxPromise from 'redux-promise'
 import reducers from '@/reducers'
 import state from './state'
 
@@ -7,7 +7,7 @@ const store = createStore(
   reducers,
   state,
   compose(
-    applyMiddleware(ReduxThunk),
+    applyMiddleware(ReduxPromise),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )

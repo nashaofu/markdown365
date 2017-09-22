@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import codemirror from 'codemirror'
+import classnames from 'classnames'
+
 import 'codemirror/mode/markdown/markdown'
 import 'codemirror/addon/scroll/simplescrollbars'
 import 'codemirror/addon/display/placeholder'
@@ -21,9 +23,10 @@ export default class Editor extends Component {
       theme: 'xq-light',
       indentUnit: 2,
       smartIndent: true,
-      tabSize: true,
+      tabSize: 4,
+      indentWithTabs: true,
       keyMap: 'sublime',
-      lineWrapping: false,
+      lineWrapping: true,
       scrollbarStyle: 'overlay',
       inputStyle: 'contenteditable',
       showCursorWhenSelecting: true,
@@ -45,8 +48,15 @@ export default class Editor extends Component {
   }
 
   render () {
+    const { viewerShow } = this.props
+    const editor = classnames(
+      'editor',
+      {
+        'editor-viewer-hide': !viewerShow
+      }
+    )
     return (
-      <div className="editor">
+      <div className={editor}>
         <div ref="editor" className="editor-container"></div>
       </div>
     )

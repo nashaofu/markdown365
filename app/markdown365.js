@@ -24,6 +24,8 @@ exports = module.exports = class Markdwown365 {
     this.onReady()
     this.onQuit()
 
+    this.onAppMounted()
+
     this.onWindowClose()
     this.onWindowMaximize()
     this.onWindowMinimize()
@@ -100,6 +102,13 @@ exports = module.exports = class Markdwown365 {
     } else {
       this.$window.loadURL(path.join(__dirname, '../views/index.html'))
     }
+  }
+
+  // react app页面初始化完成(componentDidMount)
+  onAppMounted () {
+    ipcMain.on('app-mounted', () => {
+      this.$window.webContents.send('window-maximize-change', this.$window.isMaximized())
+    })
   }
 
   // 关闭窗口

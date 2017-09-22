@@ -11,14 +11,14 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  edit: file => dispatch(files.edit(file))
+  editFile: file => dispatch(files.editFile(file))
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class FilesContainer extends Component {
   onSelect = file => {
     if (file.filename !== this.props.active.filename) {
-      this.props.edit(file)
+      this.props.editFile(file)
     }
   }
   render () {

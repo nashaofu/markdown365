@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions'
 
-export const ON_CHANGE = 'ON_CHANGE'
+export const EDITOR_ON_CHANGE = 'EDITOR_ON_CHANGE'
 
 export default createActions({
-  [ON_CHANGE]: value => value
+  [EDITOR_ON_CHANGE]: value => value
 })

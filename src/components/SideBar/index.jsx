@@ -12,6 +12,11 @@ export default props => {
       'side-bar-panel-expanding': props.sideBarExpanding
     }
   )
+
+  const viewerToggle = classnames({
+    'icons-visibility': props.viewerShow,
+    'icons-visibility-off': !props.viewerShow
+  })
   return (
     <div className="side-bar">
       <div className="side-bar-container">
@@ -24,13 +29,22 @@ export default props => {
             <i className="icons-menu" />
           </button>
         </div>
-        <div className="side-bar-container-add">
+        <div className="side-bar-container-open-file">
           <button
             className="side-bar-button"
             onClick={props.onAddFile}
-            title={lang.addFile}
+            title={lang.openFile}
           >
-            <i className="icons-plus" />
+            <i className="icons-open-file" />
+          </button>
+        </div>
+        <div className="side-bar-container-viewer-toggle">
+          <button
+            className="side-bar-button"
+            onClick={props.onViewerToggle}
+            title={lang.viewerToggle}
+          >
+            <i className={viewerToggle} />
           </button>
         </div>
         <div className="side-bar-container-settings">

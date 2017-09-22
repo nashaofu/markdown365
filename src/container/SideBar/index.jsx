@@ -11,23 +11,26 @@ import SideBar from '@/components/SideBar'
 
 const mapStateToProps = state => {
   return {
-    sideBarExpanding: state.ui.sideBarExpanding
+    sideBarExpanding: state.ui.sideBarExpanding,
+    viewerShow: state.ui.viewerShow
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   sidebarToggle: sideBarExpanding => dispatch(ui.sidebarToggle(sideBarExpanding)),
-  addFiles: file => dispatch(files.add(file))
+  viewerToggle: viewerShow => dispatch(ui.viewerToggle(viewerShow)),
+  openFile: file => dispatch(files.openFile(file)),
+  editFile: file => dispatch(files.editFile(file))
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class AppBarContainer extends Component {
   componentWillMount () {
-    ipcRenderer.addListener('open-file', this.addFiles)
+    ipcRenderer.addListener('open-file', this.openFile)
   }
 
   componentWillUnmount () {
-    ipcRenderer.removeListener('open-file', this.addFiles)
+    ipcRenderer.removeListener('open-file', this.openFile)
   }
 
   onSidebarToggle = () => {
@@ -38,23 +41,33 @@ export default class AppBarContainer extends Component {
     ipcRenderer.send('open-file')
   }
 
-  addFiles = (e, files) => {
+  openFile = (e, files) => {
     if (files) {
       files = files.map(file => ({
         filename: file,
         basename: path.basename(file)
       }))
-      this.props.addFiles(files)
+      this.props.openFile(files)
+      const file = files[files.length - 1]
+      if (file) {
+        this.props.editFile(file)
+      }
     }
   }
 
+  onViewerToggle = () => {
+    this.props.viewerToggle(!this.props.viewerShow)
+  }
+
   render () {
-    const { sideBarExpanding } = this.props
+    const { sideBarExpanding, viewerShow } = this.props
     return (
       <SideBar
         sideBarExpanding={sideBarExpanding}
+        viewerShow={viewerShow}
         onSidebarToggle={this.onSidebarToggle}
         onAddFile={this.onAddFile}
+        onViewerToggle={this.onViewerToggle}
       />
     )
   }

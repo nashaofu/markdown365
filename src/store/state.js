@@ -6,10 +6,6 @@ export default {
         basename: 'going.md'
       },
       {
-        filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\[控制器时间校验功能说明文档.md',
-        basename: '[控制器时间校验功能说明文档.md'
-      },
-      {
         filename: 'C:\\Users\\nashaofu\\Documents\\Git\\bot.wiki\\bot-uaa-layout.md',
         basename: 'bot-uaa-layout.md'
       },

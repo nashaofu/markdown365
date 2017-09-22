@@ -1,31 +1,30 @@
 import { createActions } from 'redux-actions'
 import path from 'path'
 import fs from 'fs'
-export const ADD = 'ADD'
-export const REMOVE = 'REMOVE'
-export const EDIT = 'EDIT'
+export const OPEN_FILE = 'OPEN_FILE'
+export const REMOVE_FILE = 'REMOVE_FILE'
+export const EDIT_FILE = 'EDIT_FILE'
 
-export default {
-  ...createActions({
-    [ADD]: file => file,
-    [REMOVE]: file => file
-  }),
-  edit: file => async dispatch => {
+export default createActions({
+  [OPEN_FILE]: file => file,
+  [REMOVE_FILE]: file => file,
+  [EDIT_FILE]: async file => {
     const filename = path.normalize(file.filename)
-    fs.stat(filename, (error, stat) => {
-      if (!error) {
+    return await new Promise((resolve, reject) => {
+      fs.stat(filename, (error, stat) => {
+        if (error) {
+          return reject(error)
+        }
         fs.readFile(filename, (err, buffer) => {
-          if (!err) {
-            dispatch({
-              type: EDIT,
-              payload: {
-                file,
-                value: buffer.toString()
-              }
-            })
+          if (err) {
+            return reject(err)
           }
+          resolve({
+            file,
+            value: buffer.toString()
+          })
         })
-      }
+      })
     })
   }
-}
+})
