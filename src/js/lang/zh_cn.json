@@ -4,6 +4,9 @@
   "windowMinimize": "最小化",
   "sidebarToggle": "展开/关闭",
   "openFile": "打开文件",
-  "viewerToggle": "显示/隐藏预览",
-  "settings": "设置"
+  "settings": "设置",
+  "viewMode": "模式设置",
+  "writeMode": "写作模式",
+  "readMode": "阅读模式",
+  "previewMode": "预览模式"
 }

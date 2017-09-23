@@ -7,7 +7,7 @@ import App from '@/components/App'
 const mapStateToProps = state => {
   return {
     sideBarExpanding: state.ui.sideBarExpanding,
-    viewerShow: state.ui.viewerShow
+    viewMode: state.ui.viewMode
   }
 }
 
@@ -19,11 +19,11 @@ export default class AppContainer extends Component {
     ipcRenderer.send('app-mounted')
   }
   render () {
-    const { sideBarExpanding, viewerShow } = this.props
+    const { sideBarExpanding, viewMode } = this.props
     return (
       <App
         sideBarExpanding={sideBarExpanding}
-        viewerShow={viewerShow}
+        viewMode={viewMode}
       />
     )
   }

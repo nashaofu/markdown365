@@ -48,11 +48,11 @@ export default class Editor extends Component {
   }
 
   render () {
-    const { viewerShow } = this.props
+    const { viewMode } = this.props
     const editor = classnames(
       'editor',
       {
-        'editor-viewer-hide': !viewerShow
+        'editor-mode-write': viewMode === 'writeMode'
       }
     )
     return (

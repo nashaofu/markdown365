@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
 import { ui } from '@/actions'
-import AppBar from '@/components/AppBar'
+import TitleBar from '@/components/TitleBar'
 
 const mapStateToProps = state => {
   return {
@@ -46,7 +46,7 @@ export default class AppBarContainer extends Component {
     const { active, windowIsMaximize } = this.props
     const title = active.basename || 'Markdown365'
     return (
-      <AppBar
+      <TitleBar
         title={title}
         windowIsMaximize={windowIsMaximize}
         onWindowClose={this.onWindowClose}

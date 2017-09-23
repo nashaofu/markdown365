@@ -7,7 +7,7 @@ import Editor from '@/components/Editor'
 const mapStateToProps = state => {
   return {
     value: state.editor.value,
-    viewerShow: state.ui.viewerShow
+    viewMode: state.ui.viewMode
   }
 }
 
@@ -22,11 +22,11 @@ export default class EditorContainer extends Component {
   }
 
   render () {
-    const { value, viewerShow } = this.props
+    const { value, viewMode } = this.props
     return (
       <Editor
         value={value}
-        viewerShow={viewerShow}
+        viewMode={viewMode}
         onChange={this.onChange}
       />
     )

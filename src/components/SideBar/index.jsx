@@ -13,10 +13,6 @@ export default props => {
     }
   )
 
-  const viewerToggle = classnames({
-    'icons-visibility': props.viewerShow,
-    'icons-visibility-off': !props.viewerShow
-  })
   return (
     <div className="side-bar">
       <div className="side-bar-container">
@@ -36,15 +32,6 @@ export default props => {
             title={lang.openFile}
           >
             <i className="icons-open-file" />
-          </button>
-        </div>
-        <div className="side-bar-container-viewer-toggle">
-          <button
-            className="side-bar-button"
-            onClick={props.onViewerToggle}
-            title={lang.viewerToggle}
-          >
-            <i className={viewerToggle} />
           </button>
         </div>
         <div className="side-bar-container-settings">

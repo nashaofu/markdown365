@@ -8,4 +8,13 @@
 ## TODO
 - [ ] 管理浏览器插件
 - [ ] 编写统一接口的桌面API
-- [ ] 文件支持一个与多个同时操作如：addFile addFiles
+- [ ] 文件支持一个与多个同时操作如：openFile openFiles
+
+## img url
+```javascript
+let src = img.getAttribute('src');
+if (url.parse(src).protocol === null) {
+    if (!path.isAbsolute(src)) src = path.resolve(w.directory, src);
+    src = url.resolve('file://', src);
+}
+```

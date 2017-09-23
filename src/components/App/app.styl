@@ -1,15 +1,17 @@
+@import "../../stylus/markdown365.styl"
 .app-container
   position absolute
   top 4rem
   right 0
-  bottom 0
+  bottom 2.6rem
   left 0
-  &-view
+  &-viewer
     position absolute
     top 0
     right 0
     bottom 0
-    left 4rem
-    transition all 0.3s ease-out
-    &-side-bar-expanding
-      left 32rem
+    left 0
+    margin-left 4rem
+    transition $transition
+    &&-side-bar-expanding
+      margin-left 32rem

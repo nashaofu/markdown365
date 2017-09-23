@@ -1,30 +1,33 @@
 import React from 'react'
 import classnames from 'classnames'
-import AppBar from '@/container/AppBar'
+import TitleBar from '@/container/TitleBar'
 import SideBar from '@/container/SideBar'
 import Editor from '@/container/Editor'
 import Viewer from '@/container/Viewer'
+import StatusBar from '@/container/StatusBar'
 
 import './app.styl'
 
 export default props => {
-  const appContainerView = classnames(
-    'app-container-view',
+  const EditorComponent = props.viewMode !== 'readMode' && <Editor />
+  const ViewerComponent = props.viewMode !== 'writeMode' && <Viewer />
+  const sideBarExpanding = classnames(
+    'app-container-viewer',
     {
-      'app-container-view-side-bar-expanding': props.sideBarExpanding
+      'app-container-viewer-side-bar-expanding': props.sideBarExpanding
     }
   )
-  const ViewerComponent = props.viewerShow && <Viewer />
   return (
     <div>
-      <AppBar />
+      <TitleBar />
       <div className="app-container">
         <SideBar />
-        <div className={appContainerView}>
-          <Editor />
+        <div className={sideBarExpanding}>
+          {EditorComponent}
           {ViewerComponent}
         </div>
       </div>
+      <StatusBar />
     </div>
   )
 }

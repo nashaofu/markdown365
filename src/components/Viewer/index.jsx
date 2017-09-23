@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import Markdown365Parser from 'markdown365-parser'
+import { shell } from 'electron'
 import './viewer.styl'
 
 export default class Viewer extends Component {
@@ -37,9 +39,29 @@ export default class Viewer extends Component {
     }
   }
 
+  onClick = event => {
+    let target = event.target
+    // 在浏览器中打开链接
+    while (target && this.refs.viewer.contains(target)) {
+      if (target.tagName.toUpperCase() === 'A' && target.href) {
+        event.preventDefault()
+        shell.openExternal(target.href)
+        break
+      }
+      target = target.parentElement
+    }
+  }
+
   render () {
+    const { viewMode } = this.props
+    const viewer = classnames(
+      'viewer',
+      {
+        'viewer-mode-read': viewMode === 'readMode'
+      }
+    )
     return (
-      <div className="viewer">
+      <div className={viewer} onClick={this.onClick}>
         <div ref="viewer"></div>
       </div>
     )

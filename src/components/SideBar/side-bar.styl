@@ -1,3 +1,4 @@
+@import "../../stylus/markdown365.styl"
 .side-bar
   width 4rem
   position absolute
@@ -37,7 +38,7 @@
     &-settings
       position absolute
       right 0
-      bottom 0.5rem
+      bottom 0
       left 0
 
   &-panel
@@ -50,7 +51,7 @@
     background-color #fff
     overflow-x hidden
     overflow-y auto
-    transition all 0.3s ease-out
+    transition $transition
     opacity 0
     transform translateX(-100%)
     &-expanding

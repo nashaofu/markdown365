@@ -11,14 +11,12 @@ import SideBar from '@/components/SideBar'
 
 const mapStateToProps = state => {
   return {
-    sideBarExpanding: state.ui.sideBarExpanding,
-    viewerShow: state.ui.viewerShow
+    sideBarExpanding: state.ui.sideBarExpanding
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   sidebarToggle: sideBarExpanding => dispatch(ui.sidebarToggle(sideBarExpanding)),
-  viewerToggle: viewerShow => dispatch(ui.viewerToggle(viewerShow)),
   openFile: file => dispatch(files.openFile(file)),
   editFile: file => dispatch(files.editFile(file))
 })
@@ -55,19 +53,13 @@ export default class AppBarContainer extends Component {
     }
   }
 
-  onViewerToggle = () => {
-    this.props.viewerToggle(!this.props.viewerShow)
-  }
-
   render () {
-    const { sideBarExpanding, viewerShow } = this.props
+    const { sideBarExpanding } = this.props
     return (
       <SideBar
         sideBarExpanding={sideBarExpanding}
-        viewerShow={viewerShow}
         onSidebarToggle={this.onSidebarToggle}
         onOpenFile={this.onOpenFile}
-        onViewerToggle={this.onViewerToggle}
       />
     )
   }
