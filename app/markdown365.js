@@ -67,7 +67,7 @@ exports = module.exports = class Markdwown365 {
       frame: false,
       show: false,
       backgroundColor: '#ffffff',
-      // icon: path.join(__dirname, '../icon/32x32.png'),
+      icon: path.join(__dirname, '../icons/markdown365.png'),
       resizable: true
     })
 

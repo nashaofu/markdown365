@@ -4,7 +4,7 @@ const rimraf = require('rimraf')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const webpackProdConf = require('./webpack.prod.conf')
-
+const build = require('./build')
 const spinner = ora('building for production...')
 spinner.start()
 rimraf(path.resolve(__dirname, '../views'), error => {
@@ -25,6 +25,10 @@ rimraf(path.resolve(__dirname, '../views'), error => {
       process.exit(1)
     }
 
-    console.log(chalk.cyan('  Build complete.\n'))
+    // 打包APP
+    build()
+      .then(() => {
+        console.log(chalk.cyan('  All build complete.\n'))
+      })
   })
 })
