@@ -27,6 +27,9 @@ export default handleActions({
     if (index !== -1) {
       state.files.splice(index, 1)
     }
+    if (state.active.filename === payload.filename) {
+      state.active = {}
+    }
     return state
   },
 

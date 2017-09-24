@@ -15,11 +15,11 @@ export default class StatusBar extends Component {
   ]
 
   componentDidMount () {
-    document.addEventListener('click', this.onClickOut)
+    window.addEventListener('click', this.onClickOut)
   }
 
   componentWillUnmount () {
-    document.removeEventListener('click', this.onClickOut)
+    window.removeEventListener('click', this.onClickOut)
   }
 
   onToggleViewModesPanel = () => {

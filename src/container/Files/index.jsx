@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
-import { files } from '@/actions'
+import { files, editor } from '@/actions'
 import Files from '@/components/Files'
 
 const mapStateToProps = state => {
@@ -13,7 +13,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  editFile: file => dispatch(files.editFile(file))
+  editFile: file => dispatch(files.editFile(file)),
+  removeFile: file => dispatch(files.removeFile(file)),
+  editorOnChange: value => dispatch(editor.editorOnChange(value))
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -27,6 +29,14 @@ export default class FilesContainer extends Component {
       this.props.editFile(file)
     }
   }
+
+  onRemove = file => {
+    this.props.removeFile(file)
+    if (file.filename === this.props.active.filename) {
+      this.props.editorOnChange('')
+    }
+  }
+
   render () {
     const { files, active } = this.props
     return (
@@ -35,6 +45,7 @@ export default class FilesContainer extends Component {
         active={active}
         onOpenFile={this.onOpenFile}
         onSelect={this.onSelect}
+        onRemove={this.onRemove}
       />
     )
   }

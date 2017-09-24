@@ -1,7 +1,5 @@
 .files
-  list-style none
-  padding 0
-  margin 0
+  position relative
   &-open-file
     margin 1rem auto
     text-align center
@@ -26,29 +24,48 @@
       &:active
         background-color #09f
         box-shadow 0 0 3rem #bfbfbf
-  &-item
-    height 5.2rem
-    padding 7px
-    cursor pointer
-    border-top 0.1rem solid rgba(248, 248, 248,0.8)
-    border-bottom 0.1rem solid rgba(248, 248, 248,0.8)
-    overflow hidden
-    transition all 0.15s ease-in-out
-    &:hover
-      background-color #f8f8f8
-    &:active
-      background-color #f8f8f8
-      background-image linear-gradient(to bottom, #fff, #eee)
-    &-filename
-      height 3.6rem
-      line-height 3.6rem
+  &-list
+    list-style none
+    padding 0
+    margin 0
+    &-item
+      height 5.2rem
+      padding 7px
+      cursor pointer
+      border-top 0.1rem solid rgba(248, 248, 248,0.8)
+      border-bottom 0.1rem solid rgba(248, 248, 248,0.8)
       overflow hidden
-      white-space nowrap
-      text-overflow ellipsis
-      overflow hidden
-      text-overflow ellipsis
-    &&-active
-      color #06f
-      font-weight 400
-      background-color #f8f8f8
-      background-image linear-gradient(to bottom, #fff, #eee)
+      transition all 0.15s ease-in-out
+      &:hover
+        background-color #f8f8f8
+      &:active
+        background-color #f8f8f8
+        background-image linear-gradient(to bottom, #fff, #eee)
+      &-filename
+        height 3.6rem
+        line-height 3.6rem
+        overflow hidden
+        white-space nowrap
+        text-overflow ellipsis
+        overflow hidden
+        text-overflow ellipsis
+      &&-active
+        font-weight 400
+        background-color #f8f8f8
+        background-image linear-gradient(to bottom, #fff, #eee)
+  &-context-menu
+    position absolute
+    width 10rem
+    margin 0
+    padding 0.1rem 0
+    list-style none
+    background-color #fcfcfc
+    border 0.1rem solid #eee
+    box-shadow -0.2rem -0.2rem 12rem #eee
+    li
+      padding 0.5rem
+      text-align center
+      color #999
+      cursor pointer
+      &:hover
+          background-color #eee
