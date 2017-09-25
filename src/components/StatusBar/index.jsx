@@ -48,7 +48,7 @@ export default class StatusBar extends Component {
   render () {
     const { viewModesPanelStatus } = this.state
     const { viewMode } = this.props
-    const modes = this.viewModes.map(item => {
+    const Modes = this.viewModes.map(item => {
       const check = item === viewMode && <i className="icons-check" />
       return (
         <li key={item} onClick={() => this.onSelectViewMode(item)}>
@@ -57,6 +57,7 @@ export default class StatusBar extends Component {
         </li>
       )
     })
+    const ModesPanel = <ul className="status-bar-view-modes-panel">{Modes}</ul>
     return (
       <div className="status-bar">
         <div ref="view" className="status-bar-view">
@@ -67,9 +68,7 @@ export default class StatusBar extends Component {
           >
             <i className="icons-visibility" />
           </button>
-          <ul className="status-bar-view-modes-panel">
-            {viewModesPanelStatus && modes}
-          </ul>
+          {viewModesPanelStatus && ModesPanel}
         </div>
       </div>
     )

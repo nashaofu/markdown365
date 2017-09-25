@@ -16,8 +16,8 @@ const render = App => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App', async () => {
-    const nextApp = await import('./components/App')
+  module.hot.accept('./container/App', async () => {
+    const nextApp = await import('./container/App')
     render(nextApp.default)
   })
 }
