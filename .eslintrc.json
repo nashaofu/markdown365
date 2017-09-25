@@ -18,6 +18,7 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "generator-star-spacing": "error",
+    "no-template-curly-in-string": "off",
     "no-debugger": "error",
     "no-return-await": "off",
     "no-cond-assign": "off",
