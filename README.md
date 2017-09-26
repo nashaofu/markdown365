@@ -10,6 +10,7 @@
 - [ ] 编写统一接口的桌面API
 - [x] 文件支持一个与多个同时操作如：openFile openFiles
 - [ ] clickOut统一函数处理
+- [ ] 页面锚点跳转支持
 
 ## img url
 ```javascript
