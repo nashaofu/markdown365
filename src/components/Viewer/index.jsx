@@ -62,7 +62,7 @@ export default class Viewer extends Component {
     )
     return (
       <div className={viewer} onClick={this.onClick}>
-        <div ref="viewer"></div>
+        <div ref="viewer" className="viewer-container"></div>
       </div>
     )
   }

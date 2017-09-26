@@ -5,7 +5,8 @@ html
   font-size 10px
 body
   font-size 1.6rem
-  color #333
+  line-height 1.5
+  color #555
   // 字体
   font-family $font-family
   overflow hidden
@@ -20,3 +21,13 @@ pre
 
 button
   font-family $font-family
+
+::-webkit-scrollbar
+  width 0.6rem
+  height 0.6rem
+  &-track
+    border-radius 0.3rem
+    background-color rgba(231,231,231,0.1)
+  &-thumb
+    background-color #bcd
+    border-radius 0.3rem
