@@ -10,7 +10,10 @@ const config = {
     productName: 'Markdown365',
     copyright: `Copyright © ${new Date().getFullYear()} ${author}`,
     asar: true,
-    artifactName: '${productName}-${version}.${ext}',
+    artifactName: '${productName}-${version}-${os}-${arch}.${ext}',
+    directories: {
+      output: path.join(__dirname, '../release')
+    },
     // linux: {
     //   target: 'deb',
     //   icon: path.join(__dirname, '../icons'),
