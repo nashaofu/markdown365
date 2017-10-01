@@ -14,11 +14,11 @@ const config = {
     directories: {
       output: path.join(__dirname, '../release')
     },
-    // linux: {
-    //   target: 'deb',
-    //   icon: path.join(__dirname, '../icons'),
-    //   description: 'Markdown365 —— a powerfull markdown editor'
-    // },
+    linux: {
+      target: 'deb',
+      icon: path.join(__dirname, '../icons'),
+      description: 'Markdown365 —— A powerfull markdown editor'
+    },
     win: {
       target: 'nsis',
       icon: path.join(__dirname, '../icons/markdown365.ico')
