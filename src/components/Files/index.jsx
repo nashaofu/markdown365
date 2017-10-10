@@ -29,7 +29,6 @@ export default class Files extends Component {
 
   onContextMenu = (event, file) => {
     const { top, left, right } = this.refs.el.getBoundingClientRect()
-    console.log(this.refs.el.getBoundingClientRect())
     let x = event.clientX - left
     let y = event.clientY - top
     this.setState({

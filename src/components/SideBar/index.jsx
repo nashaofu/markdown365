@@ -34,6 +34,15 @@ export default props => {
             <i className="icons-open-file" />
           </button>
         </div>
+        <div className="side-bar-container-new-file">
+          <button
+            className="side-bar-button"
+            onClick={props.onNewFile}
+            title={lang.newFile}
+          >
+            <i className="icons-new-file" />
+          </button>
+        </div>
         <div className="side-bar-container-settings">
           <button
             className="side-bar-button"

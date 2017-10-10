@@ -1,4 +1,5 @@
 import path from 'path'
+import fs from 'fs'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => ({
 export default class AppBarContainer extends Component {
   componentWillMount () {
     ipcRenderer.addListener('open-file', this.openFile)
+    ipcRenderer.addListener('save-file', this.saveFile)
   }
 
   componentWillUnmount () {
@@ -37,6 +39,10 @@ export default class AppBarContainer extends Component {
 
   onOpenFile = () => {
     ipcRenderer.send('open-file')
+  }
+
+  onNewFile = () => {
+    ipcRenderer.send('save-file')
   }
 
   openFile = (e, files) => {
@@ -53,6 +59,26 @@ export default class AppBarContainer extends Component {
     }
   }
 
+  saveFile = (e, file) => {
+    if (file) {
+      fs.access(file, fs.constants.R_OK | fs.constants.W_OK, error => {
+        if (error) {
+          return
+        }
+        fs.writeFile(file, '', err => {
+          if (!err) {
+            file = {
+              filename: file,
+              basename: path.basename(file)
+            }
+            this.props.openFile([file])
+            this.props.editFile(file)
+          }
+        })
+      })
+    }
+  }
+
   render () {
     const { sideBarExpanding } = this.props
     return (
@@ -60,6 +86,7 @@ export default class AppBarContainer extends Component {
         sideBarExpanding={sideBarExpanding}
         onSidebarToggle={this.onSidebarToggle}
         onOpenFile={this.onOpenFile}
+        onNewFile={this.onNewFile}
       />
     )
   }
