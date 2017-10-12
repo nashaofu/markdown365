@@ -1,7 +1,7 @@
 {
   "name": "markdown365",
   "version": "0.0.1",
-  "description": "A powerfull markdown editor",
+  "description": "A powerful markdown editor",
   "private": true,
   "main": "./app/index.js",
   "scripts": {
