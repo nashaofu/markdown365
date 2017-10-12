@@ -1,6 +1,6 @@
 ## markdown365
 
-> a powerfull markdown editor
+> a powerful markdown editor
 
 ## 开发说明
 1. 项目调试需要chrome浏览器安装react、redux扩展，否则不能够在electron中调用扩展
