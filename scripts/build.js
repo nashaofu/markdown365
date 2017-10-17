@@ -17,7 +17,7 @@ const config = {
     linux: {
       target: 'deb',
       icon: path.join(__dirname, '../icons'),
-      description: 'Markdown365 —— A powerfull markdown editor'
+      description: 'Markdown365 —— A powerful markdown editor'
     },
     win: {
       target: 'nsis',

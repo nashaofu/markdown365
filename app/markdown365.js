@@ -101,7 +101,7 @@ exports = module.exports = class Markdwown365 {
       this.$window.webContents.openDevTools()
       this.$window.loadURL('http:127.0.0.1:8080')
     } else {
-      this.$window.loadURL(path.join(__dirname, '../views/index.html'))
+      this.$window.loadURL(path.join(__dirname, '../dist/index.html'))
     }
   }
 

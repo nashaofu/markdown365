@@ -1,13 +1,15 @@
+const path = require('path')
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { version } = require('../package')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const processEnvDev = require('./process.env.dev')
 const webpackBaseConf = require('./webpack.base.conf')
 
 // add hot-reload related code to entry chunks
 Object.keys(webpackBaseConf.entry).forEach(function (name) {
   webpackBaseConf.entry[name] = [
-    './build/dev-client.js',
+    path.resolve(__dirname, './dev-client.js'),
     webpackBaseConf.entry[name]
   ]
 })
@@ -36,18 +38,16 @@ module.exports = webpackMerge(webpackBaseConf, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"',
-        VERSION: `"${version}"`
-      }
+      'process.env': processEnvDev
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html',
+      template: 'index.html',
       inject: true
-    })
+    }),
+    new FriendlyErrorsWebpackPlugin()
   ],
   devtool: '#cheap-module-eval-source-map'
 })

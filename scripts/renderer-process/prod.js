@@ -1,13 +1,14 @@
-const path = require('path')
 const ora = require('ora')
 const rimraf = require('rimraf')
 const chalk = require('chalk')
 const webpack = require('webpack')
+const config = require('./config')
 const webpackProdConf = require('./webpack.prod.conf')
-const build = require('./build')
+
 const spinner = ora('building for production...')
 spinner.start()
-rimraf(path.resolve(__dirname, '../views'), error => {
+
+rimraf(config.distdir, error => {
   if (error) throw error
   webpack(webpackProdConf, (err, stats) => {
     spinner.stop()
@@ -24,11 +25,5 @@ rimraf(path.resolve(__dirname, '../views'), error => {
       console.log(chalk.red('  Build failed with errors.\n'))
       process.exit(1)
     }
-
-    // 打包APP
-    build()
-      .then(() => {
-        console.log(chalk.cyan('  All build complete.\n'))
-      })
   })
 })

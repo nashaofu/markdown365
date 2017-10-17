@@ -5,9 +5,9 @@
   "private": true,
   "main": "./app/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node build/dev.js",
+    "dev": "node scripts/renderer-process/dev.js",
     "main": "electron .",
-    "build": "cross-env NODE_ENV=production node build/prod.js"
+    "build:renderer-process": "node scripts/renderer-process/prod.js"
   },
   "repository": {
     "type": "git",
@@ -63,6 +63,7 @@
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
+    "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "optimize-css-assets-webpack-plugin": "^3.1.1",
     "ora": "^1.3.0",

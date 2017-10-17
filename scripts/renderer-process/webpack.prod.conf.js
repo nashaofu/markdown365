@@ -4,12 +4,13 @@ const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
-const { version } = require('../package')
+const config = require('./config')
+const processEnvProd = require('./process.env.prod')
 const webpackBaseConf = require('./webpack.base.conf')
 
 module.exports = webpackMerge(webpackBaseConf, {
   output: {
-    path: path.resolve(__dirname, '../views'),
+    path: config.distdir,
     filename: 'js/[name].[chunkhash].js'
   },
   module: {
@@ -39,10 +40,7 @@ module.exports = webpackMerge(webpackBaseConf, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"',
-        VERSION: `"${version}"`
-      }
+      'process.env': processEnvProd
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -60,7 +58,7 @@ module.exports = webpackMerge(webpackBaseConf, {
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'src/index.html',
+      template: 'index.html',
       inject: true,
       minify: {
         removeComments: true,
@@ -79,7 +77,7 @@ module.exports = webpackMerge(webpackBaseConf, {
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
+            path.join(config.basedir, './node_modules')
           ) === 0
         )
       }
