@@ -4,13 +4,13 @@ const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
-const config = require('./config')
+const config = require('../config')
 const processEnvProd = require('./process.env.prod')
 const webpackBaseConf = require('./webpack.base.conf')
 
 module.exports = webpackMerge(webpackBaseConf, {
   output: {
-    path: config.distdir,
+    path: config.distRendererProcessDir,
     filename: 'js/[name].[chunkhash].js'
   },
   module: {
@@ -77,7 +77,7 @@ module.exports = webpackMerge(webpackBaseConf, {
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(config.basedir, './node_modules')
+            path.join(config.baseDir, './node_modules')
           ) === 0
         )
       }

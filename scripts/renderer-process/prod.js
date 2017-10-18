@@ -2,13 +2,13 @@ const ora = require('ora')
 const rimraf = require('rimraf')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const config = require('./config')
+const config = require('../config')
 const webpackProdConf = require('./webpack.prod.conf')
 
 const spinner = ora('building for production...')
 spinner.start()
 
-rimraf(config.distdir, error => {
+rimraf(config.distRendererProcessDir, error => {
   if (error) throw error
   webpack(webpackProdConf, (err, stats) => {
     spinner.stop()

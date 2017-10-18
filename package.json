@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A powerful markdown editor",
   "private": true,
-  "main": "./app/index.js",
+  "main": "./src/main-process/index.js",
   "scripts": {
     "dev": "node scripts/renderer-process/dev.js",
     "main": "electron .",
