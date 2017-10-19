@@ -67,7 +67,7 @@ exports = module.exports = class Markdwown365 {
       frame: false,
       show: false,
       backgroundColor: '#ffffff',
-      icon: path.join(__dirname, '../icons/markdown365.png'),
+      icon: path.resolve(__dirname, '../icons/markdown365.png'),
       resizable: true
     })
 
@@ -101,7 +101,7 @@ exports = module.exports = class Markdwown365 {
       this.$window.webContents.openDevTools()
       this.$window.loadURL('http:127.0.0.1:8080')
     } else {
-      this.$window.loadURL(path.join(__dirname, '../dist/index.html'))
+      this.$window.loadURL(path.resolve(__dirname, '../index.html'))
     }
   }
 
