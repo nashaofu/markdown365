@@ -1,9 +1,7 @@
-const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const electron = require('electron')
 const childProcess = require('child_process')
-const config = require('../config')
 const webpackDevConf = require('./webpack.dev.conf')
 const compiler = webpack(webpackDevConf)
 
