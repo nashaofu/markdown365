@@ -22,7 +22,7 @@ compiler.watch({}, (err, stats) => {
 
   electronProcess = childProcess.spawn(electron, [
     '--inspect=5858',
-    path.resolve(config.distMainProcessDir, './app.js')
+    '.'
   ])
 
   electronProcess.stdout.on('data', data => chalk.blue(data))
@@ -33,5 +33,7 @@ compiler.watch({}, (err, stats) => {
       process.exit()
     }
   })
-  manualRestart = false
+  setTimeout(() => {
+    manualRestart = false
+  }, 5000)
 })
