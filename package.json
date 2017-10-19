@@ -8,8 +8,7 @@
     "dev:main-process": "node scripts/main-process/dev.js",
     "dev:renderer-process": "node scripts/renderer-process/dev.js",
     "build:main-process": "node scripts/main-process/prod.js",
-    "build:renderer-process": "node scripts/renderer-process/prod.js",
-    "main": "electron ."
+    "build:renderer-process": "node scripts/renderer-process/prod.js"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,3 @@
-const Markdown365 = require('./markdown365')
+import Markdown365 from './markdown365'
 
 new Markdown365()

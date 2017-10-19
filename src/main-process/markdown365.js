@@ -97,7 +97,7 @@ exports = module.exports = class Markdwown365 {
     this.onContextMenu()
     // 加载URL地址
     if (process.env.NODE_ENV === 'development') {
-      require('./devtools')
+      // require('./devtools')
       this.$window.webContents.openDevTools()
       this.$window.loadURL('http:127.0.0.1:8080')
     } else {
