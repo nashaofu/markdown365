@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "A powerful markdown editor",
   "private": true,
-  "main": "./dist/main-process/app.js",
+  "main": "./dist/main/app.js",
   "scripts": {
-    "dev:main-process": "node scripts/main-process/dev.js",
-    "dev:renderer-process": "node scripts/renderer-process/dev.js",
-    "build:main-process": "node scripts/main-process/prod.js",
-    "build:renderer-process": "node scripts/renderer-process/prod.js"
+    "start": "electron .",
+    "dev:main": "node scripts/main/dev.js",
+    "dev:renderer": "node scripts/renderer/dev.js",
+    "build:main": "node scripts/main/prod.js",
+    "build:renderer": "node scripts/renderer/prod.js"
   },
   "repository": {
     "type": "git",

@@ -6,9 +6,9 @@ const distDir = path.resolve(baseDir, './dist')
 module.exports = {
   baseDir,
   srcDir,
-  srcMainProcessDir: path.resolve(srcDir, './main-process'),
-  srcRendererProcessDir: path.resolve(srcDir, './renderer-process'),
+  srcMainDir: path.resolve(srcDir, './main'),
+  srcRendererDir: path.resolve(srcDir, './renderer'),
   distDir,
-  distMainProcessDir: path.resolve(distDir, './main-process'),
-  distRendererProcessDir: path.resolve(distDir, './renderer-process')
+  distMainDir: path.resolve(distDir, './main'),
+  distRendererDir: path.resolve(distDir, './renderer')
 }

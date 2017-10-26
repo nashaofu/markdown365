@@ -3,18 +3,18 @@ const eslintFriendlyFormatter = require('eslint-friendly-formatter')
 
 module.exports = {
   // 所有路径都相对于src文件夹
-  context: config.srcRendererProcessDir,
+  context: config.srcRendererDir,
   entry: {
     app: './index.js'
   },
   output: {
-    path: config.distRendererProcessDir,
+    path: config.distRendererDir,
     filename: 'js/[name].js'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
-      '@': config.srcRendererProcessDir
+      '@': config.srcRendererDir
     }
   },
   module: {
@@ -23,7 +23,7 @@ module.exports = {
         test: /\.jsx?$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [config.srcRendererProcessDir],
+        include: [config.srcRendererDir],
         options: {
           formatter: eslintFriendlyFormatter
         }
@@ -31,7 +31,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: [config.srcRendererProcessDir]
+        include: [config.srcRendererDir]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

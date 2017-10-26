@@ -10,7 +10,7 @@ const webpackBaseConf = require('./webpack.base.conf')
 
 module.exports = webpackMerge(webpackBaseConf, {
   output: {
-    path: config.distRendererProcessDir,
+    path: config.distRendererDir,
     filename: 'js/[name].[chunkhash].js'
   },
   module: {
