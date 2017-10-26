@@ -5,10 +5,10 @@ module.exports = {
   // 所有路径都相对于src文件夹
   context: config.srcMainDir,
   entry: {
-    app: './index.js'
+    index: './index.js'
   },
   output: {
-    path: config.distMainDir,
+    path: config.distDir,
     filename: '[name].js'
   },
   resolve: {

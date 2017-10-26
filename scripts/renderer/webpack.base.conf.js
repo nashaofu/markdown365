@@ -8,7 +8,7 @@ module.exports = {
     app: './index.js'
   },
   output: {
-    path: config.distRendererDir,
+    path: config.distDir,
     filename: 'js/[name].js'
   },
   resolve: {

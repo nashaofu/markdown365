@@ -10,7 +10,6 @@ const {
 exports = module.exports = class Markdwown365 {
   // 构造函数
   constructor () {
-    this.app = app
     // 应用窗体
     this.$window = null
 
@@ -36,7 +35,7 @@ exports = module.exports = class Markdwown365 {
 
   // 应用准备完毕时执行
   onReady () {
-    this.app.on('ready', () => {
+    app.on('ready', () => {
       // 移除菜单项
       Menu.setApplicationMenu(null)
       // 创建窗体
@@ -46,8 +45,8 @@ exports = module.exports = class Markdwown365 {
 
   // 当应用的所有窗口关闭时
   onQuit () {
-    this.app.on('window-all-closed', () => {
-      this.app.quit()
+    app.on('window-all-closed', () => {
+      app.quit()
     })
   }
 
@@ -101,7 +100,7 @@ exports = module.exports = class Markdwown365 {
       this.$window.webContents.openDevTools()
       this.$window.loadURL('http:127.0.0.1:8080')
     } else {
-      this.$window.loadURL(`file://${__dirname}/index.html`)
+      this.$window.loadURL(path.resolve(__dirname, './index.html'))
     }
   }
 

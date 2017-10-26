@@ -1,40 +1,79 @@
-const path = require('path')
-const { build } = require('electron-builder')
+const ora = require('ora')
 const chalk = require('chalk')
-const { name, author } = require('../package.json')
+const rimraf = require('rimraf')
+const webpack = require('webpack')
+const { build, Platform } = require('electron-builder')
+const config = require('./config')
+const mainProdConf = require('./main/webpack.prod.conf')
+const mainRendererConf = require('./renderer/webpack.prod.conf')
 
-const config = {
-  platform: 'all',
-  appId: `com.${author}.${name}`,
-  productName: 'Markdown365',
-  copyright: `Copyright © ${new Date().getFullYear()} ${author}`,
-  artifactName: '${productName}-${version}-${os}-${arch}.${ext}',
-  asar: true,
-  out: path.join(__dirname, '../release'),
-  overwrite: true,
-  directories: {
-    output: path.join(__dirname, '../release')
-  },
-  linux: {
-    target: 'deb',
-    icon: path.join(__dirname, '../icons'),
-    description: 'Markdown365 —— A powerful markdown editor'
-  },
-  win: {
-    target: 'nsis',
-    icon: path.join(__dirname, '../icons/markdown365.ico')
-  },
-  nsis: {
-    oneClick: false,
-    perMachine: true,
-    allowToChangeInstallationDirectory: true
-  }
-}
-
-module.exports = async () => {
-  return await build(config).then(() => {
-    console.log(chalk.cyan('Build complete.\n'))
-  }).catch(error => {
-    throw error
+/**
+ * 删除目录
+ * @param {String} dirname
+ */
+const rimrafer = dirname => {
+  const spinner = ora(`removing ${dirname}...`)
+  spinner.start()
+  return new Promise((resolve, reject) => {
+    rimraf(dirname, async error => {
+      spinner.stop()
+      if (error) return reject(error)
+      resolve()
+    })
   })
 }
+
+/**
+ * webpack打包
+ * @param {Object} config
+ */
+const webpacker = config => {
+  const target = config.target.replace('-', ' ')
+  const spinner = ora(`building ${target} for production...`)
+  spinner.start()
+  return new Promise((resolve, reject) => {
+    webpack(config, (error, stats) => {
+      spinner.stop()
+      if (error) return reject(error)
+      process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+      }) + '\n\n')
+
+      if (stats.hasErrors()) {
+        console.log(chalk.red(`  Build ${target} failed with errors.\n`))
+        return reject(stats)
+      }
+      console.log(chalk.cyan(`  Build ${target} complete.\n`))
+      resolve(stats)
+    })
+  })
+}
+
+/**
+ * 打包为桌面应用
+ * @param {String} platform Windows Linux Mac
+ */
+const builder = platform => {
+  const spinner = ora(`building for ${platform}...`)
+  spinner.start()
+  return build({
+    targets: Platform[platform.toUpperCase()].createTarget(),
+    config: config.build
+  }).then(() => spinner.stop())
+}
+
+rimrafer(config.distDir)
+  .then(() => rimrafer(config.releaseDir))
+  .then(() => webpacker(mainProdConf))
+  .then(() => webpacker(mainRendererConf))
+  .then(() => builder('Windows'))
+  .then(() => {
+    console.log(chalk.cyan('  Build complete.\n'))
+  })
+  .catch(error => {
+    throw error
+  })
