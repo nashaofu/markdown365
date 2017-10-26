@@ -1,4 +1,5 @@
 const ora = require('ora')
+const chalk = require('chalk')
 const rimraf = require('rimraf')
 const webpack = require('webpack')
 const { build, Platform } = require('electron-builder')
