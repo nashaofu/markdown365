@@ -6,9 +6,12 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "electron .",
+    "dev": "node scripts/dev.js",
     "dev:main": "node scripts/main/dev.js",
     "dev:renderer": "node scripts/renderer/dev.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "build:main": "node scripts/main/prod.js",
+    "build:renderer": "node scripts/renderer/prod.js"
   },
   "repository": {
     "type": "git",

@@ -23,8 +23,8 @@ compiler.watch({}, (err, stats) => {
     '.'
   ])
 
-  electronProcess.stdout.on('data', data => chalk.blue(data))
-  electronProcess.stderr.on('data', data => chalk.red(data))
+  electronProcess.stdout.on('data', data => console.log(chalk.blue(data)))
+  electronProcess.stderr.on('data', data => console.log(chalk.red(data)))
 
   electronProcess.on('close', () => {
     if (!manualRestart) {

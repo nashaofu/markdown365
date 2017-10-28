@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 const config = require('./config')
 const mainProdConf = require('./main/webpack.prod.conf')
-const mainRendererConf = require('./renderer/webpack.prod.conf')
+const rendererProdConf = require('./renderer/webpack.prod.conf')
 const {
   rimrafer,
   webpacker,
@@ -11,10 +11,10 @@ const {
 rimrafer(config.distDir)
   .then(() => rimrafer(config.releaseDir))
   .then(() => webpacker(mainProdConf))
-  .then(() => webpacker(mainRendererConf))
+  .then(() => webpacker(rendererProdConf))
   .then(() => builder('Windows'))
   .then(() => {
-    console.log(chalk.cyan('  Build complete.\n'))
+    console.log(chalk.cyan('  Build All complete.\n'))
   })
   .catch(error => {
     throw error
