@@ -23,8 +23,16 @@ compiler.watch({}, (err, stats) => {
     '.'
   ])
 
-  electronProcess.stdout.on('data', data => console.log(chalk.blue(data)))
-  electronProcess.stderr.on('data', data => console.log(chalk.red(data)))
+  electronProcess.stdout.on('data', data => {
+    if (!/(^\s*$)/.test(data.toString())) {
+      electronProcessLog(chalk.yellowBright.bold.strikethrough(data))
+    }
+  })
+  electronProcess.stderr.on('data', data => {
+    if (!/(^\s*$)/.test(data.toString())) {
+      electronProcessLog(chalk.redBright.bold.strikethrough(data))
+    }
+  })
 
   electronProcess.on('close', () => {
     if (!manualRestart) {
@@ -35,3 +43,9 @@ compiler.watch({}, (err, stats) => {
     manualRestart = false
   }, 5000)
 })
+
+const electronProcessLog = data => {
+  console.log('---------------------Main Process Log Start---------------------')
+  console.log(data)
+  console.log('----------------------Main Process Log End----------------------')
+}

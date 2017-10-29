@@ -1,2 +1,2 @@
-require('./renderer/dev')
 require('./main/dev')
+require('./renderer/dev')

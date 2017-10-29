@@ -4,6 +4,10 @@ const processEnvProd = require('../process.env.prod')
 const webpackBaseConf = require('./webpack.base.conf')
 
 module.exports = webpackMerge(webpackBaseConf, {
+  node: {
+    __dirname: false,
+    __filename: false
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': processEnvProd
