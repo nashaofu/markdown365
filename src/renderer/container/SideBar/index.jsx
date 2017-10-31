@@ -62,19 +62,18 @@ export default class AppBarContainer extends Component {
   saveFile = (e, file) => {
     if (file) {
       fs.access(file, fs.constants.R_OK | fs.constants.W_OK, error => {
-        if (error) {
-          return
-        }
-        fs.writeFile(file, '', err => {
-          if (!err) {
-            file = {
-              filename: file,
-              basename: path.basename(file)
+        if (!error || error.code === 'ENOENT') {
+          fs.writeFile(file, '', err => {
+            if (!err) {
+              file = {
+                filename: file,
+                basename: path.basename(file)
+              }
+              this.props.openFile([file])
+              this.props.editFile(file)
             }
-            this.props.openFile([file])
-            this.props.editFile(file)
-          }
-        })
+          })
+        }
       })
     }
   }
