@@ -5,7 +5,6 @@
   "private": true,
   "main": "./dist/index.js",
   "scripts": {
-    "start": "electron .",
     "dev": "node scripts/dev.js",
     "dev:main": "node scripts/main/dev.js",
     "dev:renderer": "node scripts/renderer/dev.js",

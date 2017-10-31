@@ -1,13 +1,14 @@
-const path = require('path')
-const {
+import path from 'path'
+import {
   app,
   BrowserWindow,
   Menu,
   ipcMain,
   dialog
-} = require('electron')
+} from 'electron'
+import buildContextMenu from './build-context-menu'
 
-exports = module.exports = class Markdwown365 {
+export default class Markdwown365 {
   // 构造函数
   constructor () {
     // 应用窗体
@@ -179,81 +180,8 @@ exports = module.exports = class Markdwown365 {
     }
     this.$window.webContents.on('context-menu', (e, params) => {
       e.preventDefault()
-      this.buildContextMenu(params, this.$window)
+      // 生成上下文菜单
+      buildContextMenu(params, this.$window)
     })
-  }
-
-  // 生成上下文菜单
-  buildContextMenu (params, $win) {
-    // 菜单执行命令
-    const menuCmd = {
-      copy: {
-        id: 1,
-        label: '复制'
-      },
-      cut: {
-        id: 2,
-        label: '剪切'
-      },
-      paste: {
-        id: 3,
-        label: '粘贴'
-      },
-      selectall: {
-        id: 4,
-        label: '全选'
-      }
-    }
-
-    const { selectionText, isEditable, editFlags } = params
-
-    // 生成菜单模板
-    const template = Object.keys(menuCmd)
-      .map(cmd => {
-        const { id, label } = menuCmd[cmd]
-        let enabled = false
-        let visible = false
-        const { canCopy, canCut, canPaste, canSelectAll } = editFlags
-        switch (cmd) {
-          case 'copy':
-            // 有文字选中就显示
-            visible = !!selectionText
-            enabled = canCopy
-            break
-          case 'cut':
-            // 可以编辑就显示项目
-            visible = !!isEditable
-            // 有文字选中才可用
-            enabled = visible && !!selectionText && canCut
-            break
-          case 'paste':
-            // 可以编辑就显示项目
-            visible = !!isEditable
-            enabled = visible && canPaste
-            break
-          case 'selectall':
-            // 可以编辑就显示项目
-            visible = !!isEditable
-            enabled = visible && canSelectAll
-            break
-          default:
-            break
-        }
-        return {
-          id,
-          label,
-          role: cmd,
-          enabled,
-          visible
-        }
-      })
-      .filter(item => item.visible)
-      .sort((a, b) => a.id > b.id)
-
-    // 用模板生成菜单
-    if (template.length) {
-      const menu = Menu.buildFromTemplate(template)
-      menu.popup($win)
-    }
   }
 }
