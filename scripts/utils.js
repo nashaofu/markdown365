@@ -58,10 +58,16 @@ const webpacker = config => {
 const builder = platform => {
   const spinner = ora(`building for ${platform}...`)
   spinner.start()
-  return build({
+  const result = build({
     targets: Platform[platform.toUpperCase()].createTarget(),
     config: config.build
-  }).then(() => spinner.stop())
+  })
+  result.then(() => spinner.stop())
+    .catch(err => {
+      spinner.stop()
+      throw err
+    })
+  return result
 }
 
 module.exports = {
